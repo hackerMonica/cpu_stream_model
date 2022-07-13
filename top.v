@@ -353,7 +353,7 @@ module top (
         .wD     (WB_wD),
         .rD1    (rD1),
         .rD2    (rD2),
-        .result (digit)
+        .result ()
     );
 
     CTRL u_CTRL(
@@ -378,16 +378,16 @@ module top (
     .C          (C)
     );
 
-    wire [31:0] waddr_tmp = MEM_C - 16'h4000;
+    // wire [31:0] waddr_tmp = MEM_C - 16'h4000;
     // wire [31:0] waddr_tmp = MEM_C;
-    dram U_dram(
-        // .clk    (clk),
-        .clk    (clk_g),
-        .we    (MEM_WEn),
-        .a      (waddr_tmp[15:2]),
-        .d      (wdin),
-        .spo    (rd)
-    );
+    // dram U_dram(
+    //     // .clk    (clk),
+    //     .clk    (clk_g),
+    //     .we    (MEM_WEn),
+    //     .a      (waddr_tmp[15:2]),
+    //     .d      (wdin),
+    //     .spo    (rd)
+    // );
 //    data_mem dmem(
 //        .clk    (clk),
 //        .we    (MEM_WEn),
@@ -396,17 +396,17 @@ module top (
 //        .spo    (rd)
 //    );
   
-    // IObus u_IObus(
-    //     .rst    (rst),
-    //     .clk    (clk_g),
-    //     .we     (WEn),
-    //     .adr    (C[15:2]),
-    //     .wdata  (wdin),     
-    //     .switch (switch),
-    //     .spo    (rd),
-    //     .led    (led),
-    //     .digit  (digit)
-    // );
+    IObus u_IObus(
+        .rst    (rst),
+        .clk    (clk_g),
+        .we     (MEM_WEn),
+        .adr    (MEM_C[15:2]),
+        .wdata  (wdin),     
+        .switch (switch),
+        .spo    (rd),
+        .led    (led),
+        .digit  (digit)
+    );
 
     wire [31:0] digit;
     led_display_ctrl u_led_display(
