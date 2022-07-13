@@ -7,9 +7,11 @@ module RF (
     input wire [31:0]wR,
     input wire [31:0]wD,
     output reg [31:0]rD1,
-    output reg [31:0]rD2
-
+    output reg [31:0]rD2,
+    output wire [31:0]result
 );
+    assign result=x[19];
+
     reg [31:0]x[31:0];
     always @(*) begin
         if (rR1==0) begin
